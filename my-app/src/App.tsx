@@ -1,7 +1,9 @@
 import { Component, ReactNode } from 'react';
 import './App.css';
+import Clock from './Clock';
 import Counter from './Counter';
 import Select from './Select';
+import UsersList from './UsersLists';
 
 type State = {
   fruit: string;
@@ -32,6 +34,8 @@ class App extends Component<{}, State> {
         {/* React.createElement(Select, { items: ['Orange', 'Pomme', 'Poire']}) */}
         <h2>Hooks</h2>
         <Counter />
+        <Clock />
+        <UsersList />
       </div>
     );
   }
