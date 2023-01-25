@@ -1,0 +1,16 @@
+.host {
+  max-width: 250px;
+}
+
+.selected {
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.menu {
+  border: 1px solid black;
+}
+
+.choice {
+  padding: 5px;
+}
