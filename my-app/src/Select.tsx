@@ -1,12 +1,11 @@
 import styles from './Select.module.css';
 
-import { Component, ReactNode } from 'react';
+import { Component, createRef, ReactNode } from 'react';
 
 function Child() {
   console.log('render Child');
   return null;
 }
-
 
 type Props = {
   items?: string[];
@@ -23,6 +22,8 @@ class Select extends Component<Props, State> {
     menuOpen: false,
   };
 
+  hostRef = createRef<HTMLDivElement>();
+
   handleHostClick = () => {
     const { menuOpen } = this.state;
     this.setState({
@@ -33,20 +34,27 @@ class Select extends Component<Props, State> {
   handleItemClick = (item: string) => {
     const { onSelected } = this.props;
     onSelected(item);
-    // TODO mettre à jour le state du parent
-    // this.setState({
-    //   selectedValue: item,
-    // });
   };
+
+  componentDidMount() {
+    const callback = (event: MouseEvent) => {
+      if (!this.hostRef.current?.contains(event.target as HTMLElement)) {
+        this.setState({
+          menuOpen: false,
+        });
+      }
+    };
+    window.addEventListener('click', callback);
+  }
 
   render(): ReactNode {
     console.log('render Select');
-    
+
     const { items = [], selectedValue = '' } = this.props;
     const { menuOpen } = this.state;
 
     return (
-      <div className={styles.host} onClick={this.handleHostClick}>
+      <div ref={this.hostRef} className={styles.host} onClick={this.handleHostClick}>
         <Child />
         <div className={styles.selected}>{selectedValue}</div>
         {menuOpen && (
