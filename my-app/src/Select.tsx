@@ -38,7 +38,7 @@ class Select extends Component<Props, State> {
 
   componentDidMount() {
     const callback = (event: MouseEvent) => {
-      if (!this.hostRef.current?.contains(event.target as HTMLElement)) {
+      if (this.state.menuOpen && !this.hostRef.current?.contains(event.target as HTMLElement)) {
         this.setState({
           menuOpen: false,
         });

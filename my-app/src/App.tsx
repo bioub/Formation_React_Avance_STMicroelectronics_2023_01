@@ -1,5 +1,6 @@
 import { Component, ReactNode } from 'react';
 import './App.css';
+import Counter from './Counter';
 import Select from './Select';
 
 type State = {
@@ -29,6 +30,8 @@ class App extends Component<{}, State> {
         <h2>Rappels {new Date().toLocaleTimeString()}</h2>
         <Select items={['Orange', 'Pomme', 'Poire']} selectedValue={fruit} onSelected={this.handleSelected} />
         {/* React.createElement(Select, { items: ['Orange', 'Pomme', 'Poire']}) */}
+        <h2>Hooks</h2>
+        <Counter />
       </div>
     );
   }
