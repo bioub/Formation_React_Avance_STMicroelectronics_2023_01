@@ -1,0 +1,30 @@
+{
+	"Create Function Component (TypeScript)": {
+		"prefix": "cfc",
+		"scope": "typescriptreact",
+		"body": [
+			"function $TM_FILENAME_BASE() {",
+			"  return <div className=\"$TM_FILENAME_BASE\">${1:$TM_FILENAME_BASE}</div>;",
+			"}",
+			"",
+			"export default $TM_FILENAME_BASE;",
+			""
+		]
+	},
+	"Create Class Component (TypeScript)": {
+		"prefix": "ccc",
+		"scope": "typescriptreact",
+		"body": [
+			"import { Component } from \"react\";",
+			"",
+			"class $TM_FILENAME_BASE extends Component {",
+			"  render() {",
+			"    return <div className=\"$TM_FILENAME_BASE\">${1:$TM_FILENAME_BASE}</div>;",
+			"  }",
+			"}",
+			"",
+			"export default $TM_FILENAME_BASE;",
+			""
+		]
+	}
+}

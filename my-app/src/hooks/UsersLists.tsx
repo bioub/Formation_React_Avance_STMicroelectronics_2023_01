@@ -5,11 +5,13 @@ function UsersList() {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    (async () => {
+    async function fetchUsers () {
       const res = await fetch('https://jsonplaceholder.typicode.com/users');
       const users = await res.json();
       setUsers(users);
-    })();
+    }
+
+    fetchUsers();
   }, []);
 
   return <div className="UsersList">

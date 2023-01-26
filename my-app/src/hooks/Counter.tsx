@@ -57,7 +57,6 @@ import  { ChangeEvent, useState } from 'react';
 // Le state est un tableau :
 // [1, 0]
 
-
 function Counter() {
   const [step, setStep] = useState(1); // le premier appel récupère le premier élément du State (qui est un tableau)
   const [count, setCount] = useState(0); // le 2e appel récupère le 2e élément du State (qui est un tableau)

@@ -1,6 +1,6 @@
 import styles from './Select.module.css';
 
-import { Component, createRef, ReactNode } from 'react';
+import { Component, createRef, ReactNode, useEffect, useRef, useState } from 'react';
 
 function Child() {
   console.log('render Child');
@@ -13,6 +13,7 @@ type Props = {
   onSelected(value: string): void;
 };
 
+/*
 type State = {
   menuOpen: boolean;
 };
@@ -39,6 +40,7 @@ class Select extends Component<Props, State> {
   componentDidMount() {
     const callback = (event: MouseEvent) => {
       if (this.state.menuOpen && !this.hostRef.current?.contains(event.target as HTMLElement)) {
+        console.log('setState called');
         this.setState({
           menuOpen: false,
         });
@@ -70,5 +72,47 @@ class Select extends Component<Props, State> {
     );
   }
 }
+*/
+
+
+function Select({ items = [], selectedValue = '', onSelected = () => {} }: Props) {
+  console.log('render Select');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const hostRef = useRef<HTMLDivElement>(null);
+
+  const handleHostClick = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleItemClick = (item: string) => {
+    onSelected(item);
+  };
+
+  useEffect(() => {
+    const callback = (event: MouseEvent) => {
+      if (!hostRef.current?.contains(event.target as HTMLElement)) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('click', callback);
+  }, []);
+
+  return (
+    <div ref={hostRef} className={styles.host} onClick={handleHostClick}>
+      <Child />
+      <div className={styles.selected}>{selectedValue}</div>
+      {menuOpen && (
+        <div className={styles.menu}>
+          {items.map((item) => (
+            <div className={styles.choice} key={item} onClick={() => handleItemClick(item)}>
+              {item}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 export default Select;
