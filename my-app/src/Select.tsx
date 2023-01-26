@@ -1,6 +1,6 @@
 import styles from './Select.module.css';
 
-import { Component, createRef, ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 function Child() {
   console.log('render Child');
@@ -11,6 +11,7 @@ type Props = {
   items?: string[];
   selectedValue?: string;
   onSelected(value: string): void;
+  renderSelectedItem?(item: string): ReactNode;
 };
 
 /*
@@ -75,7 +76,7 @@ class Select extends Component<Props, State> {
 */
 
 
-function Select({ items = [], selectedValue = '', onSelected = () => {} }: Props) {
+function Select({ items = [], selectedValue = '', onSelected = () => {}, renderSelectedItem = (item: string) => item }: Props) {
   console.log('render Select');
   const [menuOpen, setMenuOpen] = useState(false);
   const hostRef = useRef<HTMLDivElement>(null);
@@ -105,7 +106,7 @@ function Select({ items = [], selectedValue = '', onSelected = () => {} }: Props
         <div className={styles.menu}>
           {items.map((item) => (
             <div className={styles.choice} key={item} onClick={() => handleItemClick(item)}>
-              {item}
+              {(item === selectedValue) ? renderSelectedItem(item) : item}
             </div>
           ))}
         </div>

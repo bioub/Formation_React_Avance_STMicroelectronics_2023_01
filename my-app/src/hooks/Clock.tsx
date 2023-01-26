@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useDebugValue, useEffect, useState } from 'react';
 
 /*
 type Props = {};
@@ -30,6 +30,7 @@ class Clock extends Component<Props, State> {
 }
 */
 
+/*
 function Clock() {
   const [now, setNow] = useState(new Date());
 
@@ -81,6 +82,27 @@ function Clock() {
       setNow(new Date());
     }, 1000);
   }, []);
+
+  return <div className="Clock">{now.toLocaleTimeString()}</div>;
+}
+*/
+
+function useNow() {
+  const [now, setNow] = useState(new Date());
+
+  useDebugValue(now.toLocaleTimeString());
+
+  useEffect(() => {
+    setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+  }, []);
+
+  return now;
+}
+
+function Clock() {
+  const now = useNow();
 
   return <div className="Clock">{now.toLocaleTimeString()}</div>;
 }

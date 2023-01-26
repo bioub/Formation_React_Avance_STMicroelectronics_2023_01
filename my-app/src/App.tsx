@@ -8,6 +8,10 @@ import Form from './forwarding-refs/Form';
 import FormWithImperativeHandle from './use-imperative-handle/Form';
 import Card from './props-children/Card';
 import Tabs from './render-props/Tabs';
+import EnhanceWithHiddenButton from './enhanceWithHiddenButton/EnhanceWithHiddenButton';
+import CounterWithHiddenButton from './enhanceWithHiddenButton/CounterWithHiddenButton';
+import ClockWithHiddenButton from './enhanceWithHiddenButton/ClockWithHiddenButton';
+import Todos from './optimize/Todos/Todos';
 
 type State = {
   fruit: string;
@@ -34,7 +38,7 @@ class App extends Component<{}, State> {
       <div className="App">
         {/* React.createElement('div', {className: 'App'}, ...) */}
         <h2>Rappels {new Date().toLocaleTimeString()}</h2>
-        <Select items={['Orange', 'Pomme', 'Poire']} selectedValue={fruit} onSelected={this.handleSelected} />
+        <Select items={['Orange', 'Pomme', 'Poire']} selectedValue={fruit} onSelected={this.handleSelected} renderSelectedItem={(item) => <b>{item}</b>} />
         {/*
         Exercice Render Props
         Ajouter une prop renderSelectedItem qui est une fonction permettant de faire
@@ -56,6 +60,19 @@ class App extends Component<{}, State> {
         </Card>
 
         <Tabs items={['Tab 1', 'Tab 2', 'Tab 3']} renderItem={(item) => <b>{item}</b>} />
+      
+        <h2>Enhance with children or higher order component</h2>
+        <EnhanceWithHiddenButton defaultShow renderButtonContent={(show) => show ? 'Masquer' : 'Afficher'}>
+          <Counter />
+        </EnhanceWithHiddenButton>
+        <EnhanceWithHiddenButton>
+          <Clock />
+        </EnhanceWithHiddenButton>
+        <CounterWithHiddenButton />
+        <ClockWithHiddenButton />
+        {/* <SelectWithHiddenButton defaultShow items={['Orange', 'Pomme', 'Poire']} selectedValue={fruit} onSelected={this.handleSelected} renderSelectedItem={(item) => <b>{item}</b>} /> */}
+        <h2>Optimisation</h2>
+        <Todos />
       </div>
     );
   }
