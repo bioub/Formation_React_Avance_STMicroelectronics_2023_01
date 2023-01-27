@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "my-app"
+		},
+		{
+			"path": "react-communication"
+		},
+		{
+			"path": "theorie"
+		},
+		{
+			"path": "exercices-optimisation"
+		}
+	],
+	"settings": {}
+}
