@@ -1,4 +1,4 @@
-import { useDebugValue, useEffect, useState } from 'react';
+import { Component, useDebugValue, useEffect, useState } from 'react';
 
 /*
 type Props = {};
@@ -11,12 +11,18 @@ class Clock extends Component<Props, State> {
     now: new Date(),
   };
 
+  _interval: any;
+
   componentDidMount() {
-    setInterval(() => {
+    this._interval = setInterval(() => {
       this.setState({
         now: new Date(),
       });
     }, 1000);
+  }
+
+  componentWillUnmount(): void {
+    clearInterval(this._interval);
   }
 
   render() {
@@ -30,7 +36,7 @@ class Clock extends Component<Props, State> {
 }
 */
 
-/*
+
 function Clock() {
   const [now, setNow] = useState(new Date());
 
@@ -78,15 +84,19 @@ function Clock() {
 
   // appel setInterval quand le composant apparait puis plus jamais
   useEffect(() => {
-    setInterval(() => {
+    const _interval = setInterval(() => {
       setNow(new Date());
     }, 1000);
+    return () => {
+      clearInterval(_interval);
+    }
   }, []);
 
   return <div className="Clock">{now.toLocaleTimeString()}</div>;
 }
-*/
 
+
+/*
 function useNow() {
   const [now, setNow] = useState(new Date());
 
@@ -106,5 +116,6 @@ function Clock() {
 
   return <div className="Clock">{now.toLocaleTimeString()}</div>;
 }
+*/
 
 export default Clock;

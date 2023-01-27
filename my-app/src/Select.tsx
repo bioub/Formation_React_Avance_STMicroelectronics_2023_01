@@ -96,6 +96,7 @@ function Select({ items = [], selectedValue = '', onSelected = () => {}, renderS
       }
     };
     window.addEventListener('click', callback);
+    // TODO removeEventListener
   }, []);
 
   return (
